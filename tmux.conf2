@@ -1,0 +1,77 @@
+unbind r 
+bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+
+set -sa terminal-overrides ".xterm*:Tc"
+set -g mouse on
+
+bind-key -n M-H previous-window
+bind-key -n M-L next-window
+
+# Binds backtick character to switch to marked pane with prefix + m
+bind \` switch-client -t'{marked}'
+
+# Better split pane keybindings
+bind-key '\' split-window -h 
+bind-key "-" split-window -v -c "#{pane_current_path}"
+bind-key "_" split-window -fv -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+
+#swap windows around 
+bind -r "<" swap-window -d -t -1
+bind -r ">" swap-window -d -t +1
+
+# Set window and panes at 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g renumber-windows on
+
+# Keep current path in newly created windows
+bind c new-window -c "#{pane_current_path}"
+
+# Pane Resizing: Prefix + Ctrl-h/j/k/l 
+bind -r C-j resize-pane -D 5
+bind -r C-k resize-pane -U 5
+bind -r C-h resize-pane -L 5
+bind -r C-l resize-pane -R 5
+
+# Move selected text up and down with alt-j/k 
+unbind C-b
+set -g prefix C-Space
+bind-key C-Space send-prefix
+
+# Open panes in current directory
+bind-key '"' split-window -v -c "#{pane_current_path}"
+bind-key % split-window -h -c "#{pane_current_path}"
+
+# act like vim
+setw -g mode-keys vi
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
+set -g @catppuccin_flavour 'mocha'
+set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
+set -g @catppuccin_user "on"
+
+#  modes
+setw -g clock-mode-colour colour5
+setw -g mode-style 'fg=colour1 bg=colour18 bold'
+
+# panes
+set -g pane-border-style 'fg=colour19 bg=colour0'
+set -g pane-active-border-style 'bg=colour0 fg=colour9'
+
+# statusbar
+set -g status-position bottom
+
+
+run '~/.config/tmux/.tmux/plugins/tpm/tpm'
