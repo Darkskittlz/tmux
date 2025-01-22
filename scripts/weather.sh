@@ -20,7 +20,7 @@ fi
 
 # Format the output
 if [[ $temp != "N/A" && $desc != "N/A" ]]; then
-  echo "${temp}°F, ${desc}"
+  echo "${temp}°F, ${desc}  |"
 else
   echo "Weather: N/A"
 fi

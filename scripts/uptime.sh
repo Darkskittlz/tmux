@@ -17,4 +17,4 @@ formatted_uptime=$(echo $formatted_uptime | sed 's/h\s*s/h/g; s/m\s*s/m/g')
 newDate=$(date +"%I:%M %p")
 
 # Print the formatted uptime
-echo "| $newDate"
+echo "$newDate"
