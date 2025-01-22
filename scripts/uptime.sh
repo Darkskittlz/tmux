@@ -14,6 +14,7 @@ formatted_uptime=${formatted_uptime// minutes/m} # Replace " minutes" with "m"
 
 # Remove any occurrences of the letter 's' after 'h' and 'm'
 formatted_uptime=$(echo $formatted_uptime | sed 's/h\s*s/h/g; s/m\s*s/m/g')
+newDate=$(date +"%I:%M %p")
 
 # Print the formatted uptime
-echo "⏳: $formatted_uptime"
+echo "| $newDate"
